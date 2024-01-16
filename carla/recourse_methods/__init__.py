@@ -8,6 +8,7 @@ from .catalog import (
     FOCUS,
     ActionableRecourse,
     CausalRecourse,
+    CFExplainer,
     Clue,
     Dice,
     Face,

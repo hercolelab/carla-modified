@@ -17,6 +17,7 @@ from ._version import __version__
 from .data import Data, DataCatalog
 from .evaluation import Benchmark
 from .models import MLModel, MLModelCatalog
+from .models.catalog.GNN_TORCH.model_gnn import TreeGridModel
 from .recourse_methods import RecourseMethod
 
 

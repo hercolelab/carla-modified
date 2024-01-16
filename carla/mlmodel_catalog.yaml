@@ -30,7 +30,6 @@ adult:
         - race_White
         - sex_Male
         - native-country_US
-
   linear:
     pytorch:
       feature_order:
@@ -62,7 +61,6 @@ adult:
         - race_White
         - sex_Male
         - native-country_US
-
   forest:
     sklearn:
       feature_order:
@@ -353,3 +351,9 @@ heloc:
         - NumInstallTradesWBalance
         - NumBank2NatlTradesWHighUtilization
         - PercentTradesWBalance
+
+treegrid:
+  gnn:
+    pytorch:
+      feature-order:
+        -None
