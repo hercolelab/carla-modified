@@ -62,6 +62,8 @@ It is planned to make all recourse methods available for all ML frameworks . The
 | Growing Spheres (GS)                                       | [Source](https://arxiv.org/pdf/1712.08443.pdf)                   |     X      |    X    |         |         |
 | Revise                                                     | [Source](https://arxiv.org/pdf/1907.09615.pdf)                   |            |    X    |         |         |
 | Wachter                                                    | [Source](https://arxiv.org/ftp/arxiv/papers/1711/1711.00399.pdf) |            |    X    |         |         |
+| CF-GNN                                                     | [Source](https://arxiv.org/abs/2102.03322)                   |            |    X    |         |         |
+| ReLAX                                                     | [Source](https://arxiv.org/abs/2110.11960)                   |            |    X    |         |         |
 
 ## Installation
 
@@ -70,93 +72,33 @@ It is planned to make all recourse methods available for all ML frameworks . The
 - `python3.7`
 - `pip`
 
-### Install via pip
-
-```sh
-pip install carla-recourse
-```
-
-## Quickstart
-
-
-```python
-from carla import OnlineCatalog, MLModelCatalog
-from carla.recourse_methods import GrowingSpheres
-
-# load a catalog dataset
-data_name = "adult"
-dataset = OnlineCatalog(data_name)
-
-# load artificial neural network from catalog
-model = MLModelCatalog(dataset, "ann")
-
-# get factuals from the data to generate counterfactual examples
-factuals = dataset.raw.iloc[:10]
-
-# load a recourse model and pass black box model
-gs = GrowingSpheres(model)
-
-# generate counterfactual examples
-counterfactuals = gs.get_counterfactuals(factuals)
-```
 
 
 ## Contributing
 
 ### Requirements
 
-- `python3.7-venv` (when not already shipped with python3.7)
+- `python3.7` (when not already shipped with python3.7)
 - Recommended: [GNU Make](https://www.gnu.org/software/make/)
 
 ### Installation
 
-Using make:
-
-```sh
-make requirements
-```
-
 Using python directly or within activated virtual environment:
 
 ```sh
-pip install -U pip setuptools wheel
-pip install -e .
+conda create --name carla python=3.7
+python -m pip install -U pip setuptools wheel
+python -m pip install -e .
+python -m pip install torch==1.13.1
+python -m pip install torch_geometric==2.3.1
+python -m pip install hydra-core
+python -m pip install texttable
 ```
+Notice: if you get an incompatibility error because of pytorch just ignore it.
 
-### Testing
+## Examples
 
-Using make:
-
-```sh
-make test
-```
-
-Using python directly or within activated virtual environment:
-
-```sh
-pip install -r requirements-dev.txt
-python -m pytest test/*
-```
-
-### Linting and Styling
-
-We use pre-commit hooks within our build pipelines to enforce:
-
-- Python linting with [flake8](https://flake8.pycqa.org/en/latest/).
-- Python styling with [black](https://github.com/psf/black).
-
-Install pre-commit with:
-
-```sh
-make install-dev
-```
-
-Using python directly or within activated virtual environment:
-
-```sh
-pip install -r requirements-dev.txt
-pre-commit install
-```
+Go to examples folder to see how to make cf-gnn and Relax work
 
 ## Licence
 

@@ -5,6 +5,8 @@ from carla.recourse_methods.catalog.cfgnn.model import CFExplainer
 
 if __name__ == "__main__":
 
+    cf_list = []
+
     # Load the dataset
     with open("carla/data/syn4.pickle", "rb") as f:
         factual = pickle.load(f)
@@ -25,8 +27,13 @@ if __name__ == "__main__":
         # Important cf-gnn is used to perform cf-explaination on node classification.
         # The dataset is a single large graph. The node to explain is passed as an integer (example_id).
         # During the preprocessing the example_id is used to extract the subgraph
-        explainer.get_counterfactuals(
+        cf = explainer.get_counterfactuals(
             factual,
             example_id,
             cfg="carla/recourse_methods/catalog/cfgnn/cfgs/syn4.json",
         )
+
+        cf_list.append(cf)
+
+    print(cf_list)
+
