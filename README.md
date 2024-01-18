@@ -1,5 +1,67 @@
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/carla-recourse?style=for-the-badge)](https://pypi.org/project/carla-recourse/) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/carla-recourse/CARLA/CI?style=for-the-badge) [![Read the Docs](https://img.shields.io/readthedocs/carla-counterfactual-and-recourse-library?style=for-the-badge)](https://carla-counterfactual-and-recourse-library.readthedocs.io/en/latest/?badge=latest) ![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge)
 
+
+# CARLA counterfactual adaptation
+
+**IMPORTANT: The framework has been adapted to partially include also ReLAX and CF-GNN explainer. Due to incopatibility problems among different python and packages versions we ***did not*** build the framework to be used as a pip package. Anyway, we are working on a major update for the entire framework. Future CARLA versions will run on Python 3.11.**
+
+## Installation
+
+### Requirements
+
+- `python3.7`
+- `pip`
+
+### Installation
+
+Using python directly or within activated virtual environment:
+
+```sh
+conda create --name carla python=3.7
+python -m pip install -U pip setuptools wheel
+python -m pip install -e .
+python -m pip install torch==1.13.1
+python -m pip install torch_geometric==2.3.1
+python -m pip install hydra-core
+python -m pip install texttable
+```
+Notice: if you get an incompatibility error because of pytorch just ignore it.
+
+## Examples
+
+
+```python
+import pandas as pd
+from xgboost import XGBClassifier
+
+from carla.recourse_methods.catalog.relax.model import Relax
+
+# Important: to modify the parameters you must go to relax/conf and modify the .yaml files
+
+# Declare a model
+model = XGBClassifier(max_depth=5, n_estimators=600)
+
+# Import the dataset
+# Covid.csv dataset is not included in this repo
+# Download data from https://github.com/hercolelab/cf-data
+factuals = pd.read_csv("examples/Covid.csv")
+x_train, y_train = (
+        factuals.iloc[:110, :-1].to_numpy(),
+        factuals.iloc[:110, -1].to_numpy(),
+    )
+
+# Fit the model
+model.fit(x_train, y_train)
+
+# Declatre the explainer
+recourse = Relax(mlmodel=model)
+
+# Get the counterfactual
+recourse.get_counterfactuals(factuals=factuals.iloc[111:])
+
+```
+
+
 # CARLA - Counterfactual And Recourse Library
 
 <img align="right" width="240" height="200" src="https://github.com/carla-recourse/CARLA/blob/main/images/carla_logo_square.png?raw=true">
@@ -65,40 +127,6 @@ It is planned to make all recourse methods available for all ML frameworks . The
 | CF-GNN                                                     | [Source](https://arxiv.org/abs/2102.03322)                   |            |    X    |         |         |
 | ReLAX                                                     | [Source](https://arxiv.org/abs/2110.11960)                   |            |    X    |         |         |
 
-## Installation
-
-### Requirements
-
-- `python3.7`
-- `pip`
-
-
-
-## Contributing
-
-### Requirements
-
-- `python3.7` (when not already shipped with python3.7)
-- Recommended: [GNU Make](https://www.gnu.org/software/make/)
-
-### Installation
-
-Using python directly or within activated virtual environment:
-
-```sh
-conda create --name carla python=3.7
-python -m pip install -U pip setuptools wheel
-python -m pip install -e .
-python -m pip install torch==1.13.1
-python -m pip install torch_geometric==2.3.1
-python -m pip install hydra-core
-python -m pip install texttable
-```
-Notice: if you get an incompatibility error because of pytorch just ignore it.
-
-## Examples
-
-Go to examples folder to see how to make cf-gnn and Relax work
 
 ## Licence
 

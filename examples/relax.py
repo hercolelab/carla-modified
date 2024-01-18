@@ -11,7 +11,7 @@ if __name__ == "__main__":
     model = XGBClassifier(max_depth=5, n_estimators=600)
 
     # Import the dataset
-    factuals = pd.read_csv("carla/recourse_methods/catalog/relax/dataset/Covid.csv")
+    factuals = pd.read_csv("examples/Covid.csv")
     x_train, y_train = (
         factuals.iloc[:110, :-1].to_numpy(),
         factuals.iloc[:110, -1].to_numpy(),
