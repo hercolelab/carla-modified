@@ -1,6 +1,6 @@
-from xgboost import XGBClassifier
-
-from carla import CsvCatalog, MLModelCatalog, OnlineCatalog
+from carla.data.catalog import CsvCatalog
+from carla.data.catalog import OnlineCatalog
+from carla import MLModelCatalog
 from carla.recourse_methods import GrowingSpheres
 
 if __name__ == "__main__":
@@ -25,10 +25,13 @@ if __name__ == "__main__":
     ]
     immutable = ["age", "sex"]
 
-    # 1. Load data set from the OnlineCatalog
-    dataset = CsvCatalog(
-        "examples/data/adult.csv", categorical, continuous, immutable, target
-    )
+    # 1. Load data set from the CsvCatalog
+    # Download data from https://github.com/hercolelab/cf-data
+    #dataset = CsvCatalog(
+    #    "examples/data/adult.csv", categorical, continuous, immutable, target
+    #)
+
+    dataset = OnlineCatalog(data_name="adult")
 
     # 2. Load pre-trained black-box model from the MLModelCatalog
     model = MLModelCatalog(

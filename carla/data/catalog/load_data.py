@@ -47,8 +47,6 @@ def load_dataset(
         cache_path = os.path.join(get_data_home(data_home), os.path.basename(full_path))
 
         if not os.path.exists(cache_path):
-            if name not in get_dataset_names():
-                raise ValueError(f"'{name}' is not an available dataset.")
             urlretrieve(full_path, cache_path)
         return cache_path
 
