@@ -3,7 +3,7 @@
 
 # CARLA counterfactual adaptation
 
-**IMPORTANT: The framework has been adapted to partially include also ReLAX and CF-GNN explainer. Due to incopatibility problems among different python and packages versions we ***did not*** build the framework to be used as a pip package. Anyway, we are working on a major update for the entire framework. Future CARLA versions will run on Python 3.11.**
+**IMPORTANT: The framework has been adapted to partially include also ReLAX and CF-GNN explainer. Due to incopatibility problems among different python and packages versions we ***did not*** build the framework to be used as a pip package. Anyway, we are working on a major update for the entire framework. Future CARLA versions will run on Python > 3.7**
 
 ## Installation
 
