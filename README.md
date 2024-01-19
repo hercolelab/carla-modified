@@ -29,6 +29,7 @@ Notice: if you get an incompatibility error because of pytorch just ignore it.
 
 ## Examples
 
+For other examples please go to the examples folder
 
 ```python
 import pandas as pd
