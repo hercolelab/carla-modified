@@ -11,13 +11,12 @@
 
 - `python3.7`
 - `pip`
-
+- `venv` or `conda`
 ### Installation
 
-Using python directly or within activated virtual environment:
-
+***Please activate your virtual envioronment before!***
+***Please check that pip is referred to python in the virtual env (use the command: which pip)***
 ```sh
-conda create --name carla python=3.7
 python -m pip install -U pip setuptools wheel
 python -m pip install -e .
 python -m pip install torch==1.13.1
